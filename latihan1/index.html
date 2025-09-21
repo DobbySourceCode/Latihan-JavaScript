@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana Javascript</title>
+</head>
+<body>
+
+    <script>
+        // Menampilkan judul dan instruksi awal kepada pengguna
+        alert("Selamat datang di Kalkulator Sederhana!\nKlik OK untuk memulai.");
+
+        // 1. Meminta input dari pengguna menggunakan prompt()
+        // Angka pertama
+        const angka1Str = prompt("Masukkan angka pertama:");
+        
+        // Operator
+        const operator = prompt("Masukkan operator (+, -, *, /):");
+
+        // Angka kedua
+        const angka2Str = prompt("Masukkan angka kedua:");
+
+        // 2. Mengubah tipe data input dari string menjadi angka (float)
+        // parseFloat digunakan agar bisa menerima angka desimal (contoh: 3.14)
+        const angka1 = parseFloat(angka1Str);
+        const angka2 = parseFloat(angka2Str);
+
+        // Variabel untuk menyimpan hasil perhitungan
+        let hasil;
+        let valid = true; // Flag untuk mengecek apakah operasi valid
+
+        // 3. Melakukan perhitungan berdasarkan operator yang dipilih
+        if (operator === '+') {
+            hasil = angka1 + angka2;
+        } else if (operator === '-') {
+            hasil = angka1 - angka2;
+        } else if (operator === '*') {
+            hasil = angka1 * angka2;
+        } else if (operator === '/') {
+            // Pengecekan khusus untuk pembagian dengan nol
+            if (angka2 !== 0) {
+                hasil = angka1 / angka2;
+            } else {
+                hasil = "Error: Tidak bisa membagi dengan nol!";
+                valid = false;
+            }
+        } else {
+            // Jika operator yang dimasukkan tidak valid
+            hasil = "Error: Operator tidak valid!";
+            valid = false;
+        }
+
+        // 4. Menampilkan hasil perhitungan atau pesan error menggunakan alert()
+        // Mengecek apakah input yang dimasukkan adalah angka yang valid (bukan teks atau input kosong)
+        if (isNaN(angka1) || isNaN(angka2)) {
+             alert("Error: Input yang Anda masukkan bukan angka. Silakan coba lagi.");
+        } else if (valid) {
+            // Jika semua valid, tampilkan hasilnya
+            alert("Hasilnya adalah: " + hasil);
+        } else {
+            // Tampilkan pesan error jika operator tidak valid atau terjadi pembagian dengan nol
+            alert(hasil);
+        }
+
+    </script>
+
+    <h1 style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+        Kalkulator Sederhana Javascript
+    </h1>
+    <p style="font-family: sans-serif; text-align: center;">
+        Silakan muat ulang (refresh) halaman ini untuk mencoba perhitungan lainnya.
+    </p>
+
+</body>
+</html>
