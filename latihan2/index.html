@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        #input-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        #task-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #add-button {
+            padding: 8px 12px;
+            margin-left: 8px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #add-button:hover {
+            background-color: #0056b3;
+        }
+        #task-list {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>To-Do List</h1>
+        <div id="input-container">
+            <input type="text" id="task-input" placeholder="Tulis tugas...">
+            <button id="add-button">Tambah</button>
+        </div>
+        <ul id="task-list">
+            </ul>
+    </div>
+
+    <script>
+        // Menunggu seluruh konten halaman dimuat sebelum menjalankan script
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Mendapatkan elemen yang dibutuhkan dari HTML
+            const taskInput = document.getElementById('task-input');
+            const addButton = document.getElementById('add-button');
+            const taskList = document.getElementById('task-list');
+
+            // Fungsi untuk menambahkan tugas baru
+            function addTask() {
+                // Mengambil teks dari input field dan menghapus spasi di awal/akhir
+                const taskText = taskInput.value.trim();
+
+                // Memastikan input tidak kosong
+                if (taskText !== "") {
+                    // Membuat elemen list item (<li>) baru
+                    const listItem = document.createElement('li');
+
+                    // Mengisi teks pada list item baru dengan teks dari input
+                    listItem.textContent = taskText;
+
+                    // Menambahkan list item baru ke dalam unordered list (<ul>)
+                    taskList.appendChild(listItem);
+
+                    // Mengosongkan kembali input field setelah tugas ditambahkan
+                    taskInput.value = "";
+                } else {
+                    alert("Silakan masukkan tugas terlebih dahulu!");
+                }
+            }
+
+            // Menambahkan event listener ke tombol 'Tambah'
+            // Saat tombol diklik, fungsi addTask akan dijalankan
+            addButton.addEventListener('click', addTask);
+
+            // Menambahkan event listener ke input field
+            // Memungkinkan pengguna menekan tombol 'Enter' untuk menambahkan tugas
+            taskInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    addTask();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
